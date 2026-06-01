@@ -7,6 +7,14 @@ const [activity, setActivity] = useState ({
     name:'',
     calories:0
 })
+
+const handleChange = (e)=>{
+    setActivity({
+        ... activity,
+        [e.target.id]: e.target.value
+    })
+    
+}
   
     return (
    <form className="space-y-5 bg-white shadow p-10 rounded-lg">
@@ -15,7 +23,8 @@ const [activity, setActivity] = useState ({
 <select className="border border-slate-300 p-2 rounded-lg w-full bg-white" 
 name="" 
 id="category"
-value={activity.category}>
+value={activity.category}
+onChange={handleChange}>
     {categories.map(category => (
         <option value={category.id} key={category.id}>
             {category.name}
@@ -30,6 +39,7 @@ value={activity.category}>
     name="" 
     id="name" 
     value={activity.name}
+    onChange={handleChange}
     className="border border-slate-300 p-2 rounded-lg"
     placeholder="Ej. Comida, Jugo de Naranja, Ensalada, Ejercicio, Pesas, Bicileta."
     />
@@ -41,6 +51,7 @@ value={activity.category}>
     name="" 
     id="calories" 
     value={activity.calories}
+    onChange={handleChange}
     className="border border-slate-300 p-2 rounded-lg"
     placeholder="Calorias. Ej. 300 o 500."
     />
