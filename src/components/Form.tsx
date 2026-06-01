@@ -1,10 +1,21 @@
+import { useState } from "react"
 import { categories } from "../data/categories"
 export default function Form() {
-  return (
+  
+const [activity, setActivity] = useState ({
+    category:'',
+    name:'',
+    calories:0
+})
+  
+    return (
    <form className="space-y-5 bg-white shadow p-10 rounded-lg">
     <div className=" grid grid-cols-1 gap-3">
 <label htmlFor="category" className="font-bold">Categorías:</label>
-<select className="border border-slate-300 p-2 rounded-lg w-full bg-white" name="" id="category">
+<select className="border border-slate-300 p-2 rounded-lg w-full bg-white" 
+name="" 
+id="category"
+value={activity.category}>
     {categories.map(category => (
         <option value={category.id} key={category.id}>
             {category.name}
@@ -13,11 +24,12 @@ export default function Form() {
 </select>
     </div>
     <div className=" grid grid-cols-1 gap-3">
-    <label htmlFor="activity" className="font-bold">Actividad:</label>
+    <label htmlFor="name" className="font-bold">Actividad:</label>
     <input 
     type="text" 
     name="" 
-    id="activity" 
+    id="name" 
+    value={activity.name}
     className="border border-slate-300 p-2 rounded-lg"
     placeholder="Ej. Comida, Jugo de Naranja, Ensalada, Ejercicio, Pesas, Bicileta."
     />
@@ -28,6 +40,7 @@ export default function Form() {
     type="number" 
     name="" 
     id="calories" 
+    value={activity.calories}
     className="border border-slate-300 p-2 rounded-lg"
     placeholder="Calorias. Ej. 300 o 500."
     />
