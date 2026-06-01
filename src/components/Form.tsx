@@ -17,6 +17,12 @@ const handleChange = (e: ChangeEvent<HTMLSelectElement>| ChangeEvent<HTMLInputEl
     })
     
 }
+
+
+const isValidActivity = ()=>{
+    const {name, calories} = activity
+    return name.trim()!== '' && calories>0
+}
   
     return (
    <form className="space-y-5 bg-white shadow p-10 rounded-lg">
@@ -59,8 +65,9 @@ onChange={handleChange}>
     />
     </div>
     <input type="submit" 
-    className="bg-gray-800 hover:bg-gray-900 p-2 w-full font-bold text-white uppercase"
-    value="Guardar Comida o Guardar Ejercicio"
+    className="bg-gray-800 hover:bg-gray-900 p-2 w-full font-bold text-white uppercase disabled:opacity-10"
+    value={activity.category ==1 ?'Guardar Comida': 'Guardar Ejercicio'}
+    disabled={!isValidActivity()}
     />
    
    </form>
