@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent } from "react"
+import { useState, type ChangeEvent, SubmitEvent } from "react"
 import type { Activity } from "../types"
 import { categories } from "../data/categories"
 export default function Form() {
@@ -18,14 +18,21 @@ const handleChange = (e: ChangeEvent<HTMLSelectElement>| ChangeEvent<HTMLInputEl
     
 }
 
-
+// Extraemos name y calorias para corroborar que tanto el nombre no tenga string vacio, como que las calorias sean mayor a 0
 const isValidActivity = ()=>{
     const {name, calories} = activity
     return name.trim()!== '' && calories>0
 }
+
+const handleSubmit = (e: SubmitEvent<HTMLFormElement>)=>{
+e.preventDefault()
+console.log('Submit...');
+
+}
   
     return (
-   <form className="space-y-5 bg-white shadow p-10 rounded-lg">
+   <form className="space-y-5 bg-white shadow p-10 rounded-lg"
+   onSubmit={handleSubmit}>
     <div className=" grid grid-cols-1 gap-3">
 <label htmlFor="category" className="font-bold">Categorías:</label>
 <select className="border border-slate-300 p-2 rounded-lg w-full bg-white" 
@@ -66,6 +73,7 @@ onChange={handleChange}>
     </div>
     <input type="submit" 
     className="bg-gray-800 hover:bg-gray-900 p-2 w-full font-bold text-white uppercase disabled:opacity-10"
+    // mostramos de forma condicional y validamos, si la categoria es 1 (comida) mostramos guardar comida, caso contrario es ejericio
     value={activity.category ==1 ?'Guardar Comida': 'Guardar Ejercicio'}
     disabled={!isValidActivity()}
     />
