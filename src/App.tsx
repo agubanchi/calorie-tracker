@@ -27,6 +27,7 @@ return (
     <section className="p-10 mx-auto max-w-4xl">
 <ActivityList
 activities={state.activities}
+dispatch={dispatch}
 />
     </section>
     </>

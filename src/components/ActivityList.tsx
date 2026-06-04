@@ -1,16 +1,18 @@
 // importo el type de Activity
 import type { Activity } from "../types"
 import { categories } from "../data/categories"
-import { useMemo } from "react"
+import { useMemo, type Dispatch } from "react"
 import {PencilSquareIcon} from '@heroicons/react/24/outline'
+import type { ActivityActions } from "../reducers/activity-reducer"
 // Genero el type para activities de tipo Activity
 type ActivityListProp = {
-    activities: Activity[]
+    activities: Activity[],
+    dispatch: Dispatch<ActivityActions>
 }
 
 
 // asigno el nuevo Type generado
-export default function ActivityList({activities}:ActivityListProp) {
+export default function ActivityList({activities, dispatch}:ActivityListProp) {
 
     const categoryName = useMemo(()=>(category:Activity['category'])=>categories.map(cat=> cat.id == category ? cat.name :''), [activities])
 
@@ -29,7 +31,8 @@ export default function ActivityList({activities}:ActivityListProp) {
             <div className="flex gap-5 items-center">
 <button>
     <PencilSquareIcon
-    className="h-8 w-8 text-gray-800"/>
+    className="h-8 w-8 text-gray-800"
+    onClick={()=> dispatch({type:'save-activeId', payload:{id:activity.id}})}/>
 </button>
             </div>
         </div>
