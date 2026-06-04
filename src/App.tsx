@@ -20,6 +20,7 @@ return (
     <div className="max-w-4xl mx-auto">
       <Form
       dispatch={dispatch}
+      state={state}
       />
     </div>
     </section>

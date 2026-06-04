@@ -6,7 +6,7 @@ export type ActivityActions =
 {type:'save-activeId' , payload: {id:Activity['id']}}
 
 // Definimos nuestro type
-type ActivityState = {
+ export type ActivityState = {
     activities: Activity[],
     activeId: Activity['id']
 }
