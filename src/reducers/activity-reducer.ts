@@ -1,4 +1,5 @@
-import type { Activity } from "../types"
+
+import type { Activity, Activity } from "../types"
 
 // Primero tenemos las acciones que describen lo que esta pasando en nuestra APP
 export type ActivityActions = 
@@ -25,9 +26,18 @@ export const activityReducer = (
 
   if(actions.type === 'save-activity'){
     //este codigo maneja la logica para actualizar el State
+   let updatedActivities: Activity[]=[]
+    if(state.activeId){
+updatedActivities = state.activities.map(activity => activity.id === state.activeId ? actions.payload.newActivity:activity
+)
+   }
+   else{
+updatedActivities= [...state.activities, actions.payload.newActivity]
+   }
     return{
 ...state,
-activities: [...state.activities, actions.payload.newActivity]
+activities: updatedActivities,
+activeId:''
     }
     
   }
