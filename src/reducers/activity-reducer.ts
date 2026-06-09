@@ -5,7 +5,8 @@ import type { Activity } from "../types"
 export type ActivityActions = 
 {type:'save-activity' , payload: {newActivity:Activity}} |
 {type:'save-activeId' , payload: {id:Activity['id']}} |
-{type:'delete-activity' , payload: {id:Activity['id']}}
+{type:'delete-activity' , payload: {id:Activity['id']}} |
+{type:'restart-app' }
 
 // Definimos nuestro type
  export type ActivityState = {
@@ -13,9 +14,13 @@ export type ActivityActions =
     activeId: Activity['id']
 }
 
+const localStorageActivities = (): Activity[]=>{
+  const activities = localStorage.getItem('activities')
+ return activities ? JSON.parse(activities) : []
+}
 // Luego tendremos nuestro State inicial
 export const initialState: ActivityState = {
-activities:[],
+activities:localStorageActivities(),
 activeId: ''
 }
 
@@ -53,6 +58,13 @@ activeId:''
     return{
       ...state,
       activities: state.activities.filter(activity=> activity.id !== action.payload.id)
+    }
+  }
+
+  if(action.type === 'restart-app'){
+    return{
+     activities:[],
+     activeId: ''
     }
   }
 
