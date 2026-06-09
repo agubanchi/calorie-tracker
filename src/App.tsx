@@ -17,7 +17,7 @@ const canRestartApp = ()=> useMemo(()=> state.activities.length > 0, [state.acti
 return (
     <>
     <header className="bg-teal-600 py-3">
-      <div className="max-w-4xl mx-auto flex justify-between">
+      <div className="max-w-4xl mx-auto flex justify-between items-center">
         <h1 className="text-center text-lg font-bold text-white uppercase">Contador de Calorías</h1>
       <button className="bg-teal-800 hover:bg-teal-900 hover:cursor-pointer rounded-lg text-white font-black p-3 disabled:opacity-10"
       disabled={!canRestartApp()}
